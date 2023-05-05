@@ -28,6 +28,8 @@ class MyLoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final DbHelper dbHelper = new DbHelper();
+    final TextEditingController user = TextEditingController();
+    final TextEditingController password = TextEditingController();
 
     return Scaffold(
       backgroundColor: const Color(0xFF11111F),
@@ -81,10 +83,11 @@ class MyLoginPage extends StatelessWidget {
                     ),
                     child: Row(
                       children: [
-                        const Expanded(
+                        Expanded(
                           child: Padding(
                             padding: EdgeInsets.only(top: 1, left: 20),
                             child: TextField(
+                              controller: user,
                               decoration: InputDecoration(
                                 hintText: 'Usuário',
                                 hintStyle: TextStyle(color: Color(0xFF11111F)),
@@ -99,6 +102,7 @@ class MyLoginPage extends StatelessWidget {
                             icon: const Icon(Icons.person,
                                 color: Color(0xFF11111F)),
                             onPressed: () {
+                              //test: save mock user when clicking this icon
                               UserModel uModel = UserModel(
                                   "123", "test", "test@gmail.co,", "123test");
                               dbHelper.saveData(uModel);
@@ -120,10 +124,11 @@ class MyLoginPage extends StatelessWidget {
                     //Senha
                     child: Row(
                       children: [
-                        const Expanded(
+                        Expanded(
                           child: Padding(
                             padding: EdgeInsets.only(top: 1, left: 20),
                             child: TextField(
+                              controller: password,
                               decoration: InputDecoration(
                                 hintText: 'Senha',
                                 hintStyle: TextStyle(color: Color(0xFF11111F)),
@@ -151,11 +156,11 @@ class MyLoginPage extends StatelessWidget {
                       height: MediaQuery.of(context).size.width * 0.1,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const MyMainPage()),
-                          );
+                          var userText = user.text.toString();
+                          var passText = password.text.toString();
+                          var returnUser =
+                              dbHelper.getLoginUser(userText, passText);
+                          print(returnUser.toString());
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFFFF8F1C),
