@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:roadread/Model/UserModel.dart';
 import 'package:roadread/screen/principal.dart';
+import 'package:roadread/DatabaseHandler/DbHelper.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,6 +27,8 @@ class MyLoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final DbHelper dbHelper = new DbHelper();
+
     return Scaffold(
       backgroundColor: const Color(0xFF11111F),
       appBar: AppBar(
@@ -95,6 +99,9 @@ class MyLoginPage extends StatelessWidget {
                             icon: const Icon(Icons.person,
                                 color: Color(0xFF11111F)),
                             onPressed: () {
+                              UserModel uModel = UserModel(
+                                  "123", "test", "test@gmail.co,", "123test");
+                              dbHelper.saveData(uModel);
                               //Se quiser que o ícone de usuário faça algo
                             },
                             padding: const EdgeInsets.only(bottom: 1)),
