@@ -55,7 +55,7 @@ class DbHelper {
     var dbClient = await db;
     var res = await dbClient!.rawQuery("SELECT * FROM $Table_User WHERE "
         "$C_UserID = '$userId' AND "
-        "$C_UserPassword = '$password");
+        "$C_UserPassword = '$password'");
 
     if (res.isNotEmpty) {
       return UserModel.fromMap(res.first);

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:roadread/Model/UserModel.dart';
 import 'package:roadread/screen/principal.dart';
+import 'package:roadread/screen/signup.dart';
 import 'package:roadread/DatabaseHandler/DbHelper.dart';
+import 'dart:developer' as developer;
 
 void main() {
   runApp(const MyApp());
@@ -103,10 +105,6 @@ class MyLoginPage extends StatelessWidget {
                                 color: Color(0xFF11111F)),
                             onPressed: () {
                               //test: save mock user when clicking this icon
-                              UserModel uModel = UserModel(
-                                  "123", "test", "test@gmail.co,", "123test");
-                              dbHelper.saveData(uModel);
-                              //Se quiser que o ícone de usuário faça algo
                             },
                             padding: const EdgeInsets.only(bottom: 1)),
                       ],
@@ -151,16 +149,19 @@ class MyLoginPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 14),
                   Center(
+                    //Botão de Login
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width * 0.5,
                       height: MediaQuery.of(context).size.width * 0.1,
                       child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           var userText = user.text.toString();
                           var passText = password.text.toString();
-                          var returnUser =
-                              dbHelper.getLoginUser(userText, passText);
-                          print(returnUser.toString());
+                          await dbHelper
+                              .getLoginUser(userText, passText)
+                              .then((UserData) {
+                            print(UserData?.userID);
+                          });
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFFFF8F1C),
@@ -181,10 +182,14 @@ class MyLoginPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 14),
+                  //Local do Crie sua conta aqui
                   GestureDetector(
                     onTap: () {
-                      // Aqui você pode adicionar a lógica para abrir o link desejado
-                      // por exemplo, utilizando o pacote url_launcher
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SignupPage()),
+                      );
                     },
                     child: const Text(
                       'Crie sua conta aqui',
@@ -205,6 +210,7 @@ class MyLoginPage extends StatelessWidget {
                             builder: (context) => const MyMainPage()),
                       );
                     },
+                    //Local da entrada como convidado
                     child: const Text(
                       'Ou entre como convidado!',
                       style: TextStyle(

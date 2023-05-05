@@ -8,18 +8,18 @@ class UserModel {
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
-      'user_id': userID,
-      'user_name': userName,
-      'user_email': userEmail,
-      'user_password': userPassword
+      'UserID': userID,
+      'UserName': userName,
+      'UserEmail': userEmail,
+      'UserPassword': userPassword
     };
     return map;
   }
 
   UserModel.fromMap(Map<String, dynamic> map) {
-    userID = map['user_id'];
-    userName = map['user_name'];
-    userEmail = map['user_email'];
-    userPassword = map['user_password'];
+    userID = map['UserID'];
+    userName = map['UserName'];
+    userEmail = map['UserEmail'];
+    userPassword = map['UserPassword'];
   }
 }
