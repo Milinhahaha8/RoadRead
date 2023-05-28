@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:roadread/screen/biblioteca.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter_tts/flutter_tts.dart';
+//import 'package:flutter_tts/flutter_tts.dart';
 
 class MyMainPage extends StatelessWidget {
   const MyMainPage({super.key});
@@ -61,45 +61,44 @@ class MyMainPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     //botão de arquivo local
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      height: MediaQuery.of(context).size.width * 0.2,
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          FlutterTts flutterTts = FlutterTts();
-                          flutterTts.speak("chanana nanana");
-                          print("chanana nanana1");
-                          // Seleciona um arquivo local
-                          FilePickerResult? result =
-                              await FilePicker.platform.pickFiles(
-                            type: FileType.any,
-                          );
-                          print("chanana nanana2");
-                          if (result != null) {
-                            print("chanana nanana3");
-                            // Obtém o caminho do arquivo selecionado
-                            String filePath = result.files.single.path!;
+                    //SizedBox(
+                    //width: MediaQuery.of(context).size.width * 0.4,
+                    // height: MediaQuery.of(context).size.width * 0.2,
+                    //     child: ElevatedButton(
+                    //     onPressed: () async {
+                    //FlutterTts flutterTts = FlutterTts();
+                    //flutterTts.speak("chanana nanana");
+                    //   print("chanana nanana1");
+                    // Seleciona um arquivo local
+                    //     FilePickerResult? result =
+                    //        await FilePicker.platform.pickFiles(
+                    //      type: FileType.any,
+                    //   );
+                    //   print("chanana nanana2");
+                    //  if (result != null) {
+                    //    print("chanana nanana3");
+                    //    // Obtém o caminho do arquivo selecionado
+                    //    String filePath = result.files.single.path!;
+                    // Lê o conteúdo do arquivo como texto
+                    //    var text = await File(filePath)
+                    //        .readAsString(encoding: utf8);
+                    //   print("AAAAH -> " + text);
+                    // Converte o texto em áudio
+                    //flutterTts.speak(text);
+                    // }
+                    //  },
+                    //   child: const Text(
+                    //    'Selecione arquivo local',
+                    //   textAlign: TextAlign.center,
+                    //   style: TextStyle(
+                    //     fontSize: 16,
+                    //    fontWeight: FontWeight.bold,
+                    //    color: Color(0xFFFF8F1C),
+                    //     ),
+                    //   ),
+                    //   ),
+                    //  ),
 
-                            // Lê o conteúdo do arquivo como texto
-                            var text = await File(filePath)
-                                .readAsString(encoding: utf8);
-                            print("AAAAH -> " + text);
-                            // Converte o texto em áudio
-                            flutterTts.speak(text);
-                          }
-                        },
-                        child: const Text(
-                          'Selecione arquivo local',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFFFF8F1C),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 20),
                     //botão de arquivo em nuvem
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.4,
@@ -113,7 +112,7 @@ class MyMainPage extends StatelessWidget {
                           ),
                         ),
                         child: const Text(
-                          'Selecione arquivo na nuvem',
+                          'Selecione um arquivo',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 16,

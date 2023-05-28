@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:roadread/Model/UserModel.dart';
 import 'package:roadread/screen/principal.dart';
+import 'package:roadread/screen/recuperarSenha.dart';
 import 'package:roadread/screen/signup.dart';
 import 'package:roadread/DatabaseHandler/DbHelper.dart';
-import 'dart:developer' as developer;
 
 void main() {
   runApp(const MyApp());
@@ -61,95 +61,111 @@ class MyLoginPage extends StatelessWidget {
                   right: BorderSide(width: 1, color: Color(0xFFFF8F1C)),
                 ),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: ListView(
                 children: [
-                  const Text(
-                    'Bem vindo ao RoadRead',
-                    style: TextStyle(
-                      color: Color(0xFFFF8F1C),
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 14),
-                  //Usuário
                   Container(
-                    width: MediaQuery.of(context).size.width * 0.5,
-                    height: MediaQuery.of(context).size.width * 0.1,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFF8F1C),
-                      borderRadius: BorderRadius.circular(25),
+                    margin: EdgeInsets.only(top: 50, bottom: 50),
+                    child: const Text(
+                      'Bem vindo ao RoadRead',
+                      style: TextStyle(
+                        color: Color(0xFFFF8F1C),
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.only(top: 1, left: 20),
-                            child: TextField(
-                              controller: user,
-                              decoration: InputDecoration(
-                                hintText: 'Usuário',
-                                hintStyle: TextStyle(color: Color(0xFF11111F)),
-                                border: InputBorder.none,
+                  ),
+
+                  //Usuário
+                  Center(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      height: MediaQuery.of(context).size.width * 0.1,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFF8F1C),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 1, left: 20),
+                              child: TextFormField(
+                                controller: user,
+                                keyboardType: TextInputType.text,
+                                decoration: InputDecoration(
+                                  hintText: 'Usuário',
+                                  hintStyle:
+                                      TextStyle(color: Color(0xFF11111F)),
+                                  border: InputBorder.none,
+                                ),
+                                textAlign: TextAlign.left,
+                                style: TextStyle(color: Color(0xFF11111F)),
                               ),
-                              textAlign: TextAlign.left,
-                              style: TextStyle(color: Color(0xFF11111F)),
                             ),
                           ),
-                        ),
-                        IconButton(
+                          IconButton(
                             icon: const Icon(Icons.person,
                                 color: Color(0xFF11111F)),
                             onPressed: () {
                               //test: save mock user when clicking this icon
                             },
-                            padding: const EdgeInsets.only(bottom: 1)),
-                      ],
+                            padding: const EdgeInsets.only(bottom: 1),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 14),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.5,
-                    height: MediaQuery.of(context).size.width * 0.1,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFF8F1C),
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    //Senha
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.only(top: 1, left: 20),
-                            child: TextField(
-                              controller: password,
-                              decoration: InputDecoration(
-                                hintText: 'Senha',
-                                hintStyle: TextStyle(color: Color(0xFF11111F)),
-                                border: InputBorder.none,
+
+                  const SizedBox(height: 15),
+
+                  //Senha
+                  Center(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      height: MediaQuery.of(context).size.width * 0.1,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFF8F1C),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 1, left: 20),
+                              child: TextField(
+                                controller: password,
+                                keyboardType: TextInputType.text,
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                  hintText: 'Senha',
+                                  hintStyle:
+                                      TextStyle(color: Color(0xFF11111F)),
+                                  border: InputBorder.none,
+                                ),
+                                textAlign: TextAlign.left,
+                                style: TextStyle(color: Color(0xFF11111F)),
                               ),
-                              textAlign: TextAlign.left,
-                              style: TextStyle(color: Color(0xFF11111F)),
                             ),
                           ),
-                        ),
-                        IconButton(
+                          IconButton(
                             icon: const Icon(Icons.password,
                                 color: Color(0xFF11111F)),
                             onPressed: () {
                               //Se quiser que o ícone de senha faça algo
                             },
-                            padding: const EdgeInsets.only(bottom: 1)),
-                      ],
+                            padding: const EdgeInsets.only(bottom: 1),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 14),
+
+                  const SizedBox(height: 15),
+                  //Botão de Login
                   Center(
-                    //Botão de Login
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width * 0.5,
                       height: MediaQuery.of(context).size.width * 0.1,
@@ -181,7 +197,7 @@ class MyLoginPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 14),
+                  const SizedBox(height: 15),
                   //Local do Crie sua conta aqui
                   GestureDetector(
                     onTap: () {
@@ -201,7 +217,27 @@ class MyLoginPage extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  const SizedBox(height: 14),
+                  //Local do recuperar senha
+                  const SizedBox(height: 15),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const RecuperarPage()),
+                      );
+                    },
+                    child: const Text(
+                      'Recupere sua senha aqui',
+                      style: TextStyle(
+                        color: Color(0xFFFF8F1C),
+                        fontSize: 11,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  const SizedBox(height: 15),
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
@@ -210,6 +246,7 @@ class MyLoginPage extends StatelessWidget {
                             builder: (context) => const MyMainPage()),
                       );
                     },
+
                     //Local da entrada como convidado
                     child: const Text(
                       'Ou entre como convidado!',
