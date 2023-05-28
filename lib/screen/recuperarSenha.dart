@@ -3,8 +3,8 @@ import 'package:roadread/main.dart';
 import 'package:roadread/Model/UserModel.dart';
 import 'package:roadread/DatabaseHandler/DbHelper.dart';
 
-class SignupPage extends StatelessWidget {
-  const SignupPage({Key? key}) : super(key: key);
+class RecuperarPage extends StatelessWidget {
+  const RecuperarPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class SignupPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF11111F),
       appBar: AppBar(
-        title: const Text('Cadastro'),
+        title: const Text('Recuperar Senha'),
       ),
       body: Column(
         children: [
@@ -45,7 +45,7 @@ class SignupPage extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.only(top: 50, bottom: 50),
                     child: const Text(
-                      'Crie sua conta!',
+                      'Recupere sua senha!',
                       style: TextStyle(
                         color: Color(0xFFFF8F1C),
                         fontSize: 18,
@@ -119,7 +119,7 @@ class SignupPage extends StatelessWidget {
                                 keyboardType: TextInputType.text,
                                 obscureText: true,
                                 decoration: InputDecoration(
-                                  hintText: 'Senha',
+                                  hintText: 'Nova Senha',
                                   hintStyle:
                                       TextStyle(color: Color(0xFF11111F)),
                                   border: InputBorder.none,
@@ -170,7 +170,7 @@ class SignupPage extends StatelessWidget {
                           ),
                         ),
                         child: const Text(
-                          'Criar',
+                          'Recuperar',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 16,

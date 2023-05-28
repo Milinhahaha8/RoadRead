@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:roadread/Model/UserModel.dart';
 import 'package:roadread/screen/principal.dart';
+import 'package:roadread/screen/recuperarSenha.dart';
 import 'package:roadread/screen/signup.dart';
 import 'package:roadread/DatabaseHandler/DbHelper.dart';
 
@@ -90,8 +91,9 @@ class MyLoginPage extends StatelessWidget {
                           Expanded(
                             child: Padding(
                               padding: EdgeInsets.only(top: 1, left: 20),
-                              child: TextField(
+                              child: TextFormField(
                                 controller: user,
+                                keyboardType: TextInputType.text,
                                 decoration: InputDecoration(
                                   hintText: 'Usuário',
                                   hintStyle:
@@ -135,6 +137,8 @@ class MyLoginPage extends StatelessWidget {
                               padding: EdgeInsets.only(top: 1, left: 20),
                               child: TextField(
                                 controller: password,
+                                keyboardType: TextInputType.text,
+                                obscureText: true,
                                 decoration: InputDecoration(
                                   hintText: 'Senha',
                                   hintStyle:
@@ -213,13 +217,14 @@ class MyLoginPage extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
+                  //Local do recuperar senha
                   const SizedBox(height: 15),
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const SignupPage()),
+                            builder: (context) => const RecuperarPage()),
                       );
                     },
                     child: const Text(
@@ -241,6 +246,7 @@ class MyLoginPage extends StatelessWidget {
                             builder: (context) => const MyMainPage()),
                       );
                     },
+
                     //Local da entrada como convidado
                     child: const Text(
                       'Ou entre como convidado!',
