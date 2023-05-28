@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:roadread/screen/biblioteca.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter_tts/flutter_tts.dart';
+//import 'package:flutter_tts/flutter_tts.dart';
 
 class MyMainPage extends StatelessWidget {
   const MyMainPage({super.key});
@@ -66,8 +66,8 @@ class MyMainPage extends StatelessWidget {
                       height: MediaQuery.of(context).size.width * 0.2,
                       child: ElevatedButton(
                         onPressed: () async {
-                          FlutterTts flutterTts = FlutterTts();
-                          flutterTts.speak("chanana nanana");
+                          //FlutterTts flutterTts = FlutterTts();
+                          //flutterTts.speak("chanana nanana");
                           print("chanana nanana1");
                           // Seleciona um arquivo local
                           FilePickerResult? result =
@@ -85,7 +85,7 @@ class MyMainPage extends StatelessWidget {
                                 .readAsString(encoding: utf8);
                             print("AAAAH -> " + text);
                             // Converte o texto em áudio
-                            flutterTts.speak(text);
+                            //flutterTts.speak(text);
                           }
                         },
                         child: const Text(

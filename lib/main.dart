@@ -3,7 +3,6 @@ import 'package:roadread/Model/UserModel.dart';
 import 'package:roadread/screen/principal.dart';
 import 'package:roadread/screen/signup.dart';
 import 'package:roadread/DatabaseHandler/DbHelper.dart';
-import 'dart:developer' as developer;
 
 void main() {
   runApp(const MyApp());
@@ -73,7 +72,7 @@ class MyLoginPage extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 14),
+                  const box(height: 14),
                   //Usuário
                   Container(
                     width: MediaQuery.of(context).size.width * 0.5,
