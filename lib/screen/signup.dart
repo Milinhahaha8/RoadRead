@@ -1,34 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:roadread/screen/principal.dart';
+import 'package:roadread/main.dart';
+import 'package:roadread/Model/UserModel.dart';
+import 'package:roadread/DatabaseHandler/DbHelper.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class SignupPage extends StatelessWidget {
+  const SignupPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'MyApp',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyLoginPage(),
-    );
-  }
-}
+    final DbHelper dbHelper = new DbHelper();
+    final TextEditingController user = TextEditingController();
+    final TextEditingController password = TextEditingController();
 
-class MyLoginPage extends StatelessWidget {
-  const MyLoginPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF11111F),
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text('Cadastro'),
       ),
       body: Column(
         children: [
@@ -57,7 +44,7 @@ class MyLoginPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    'Bem vindo ao RoadRead',
+                    'Crie sua conta!',
                     style: TextStyle(
                       color: Color(0xFFFF8F1C),
                       fontSize: 18,
@@ -77,10 +64,11 @@ class MyLoginPage extends StatelessWidget {
                     ),
                     child: Row(
                       children: [
-                        const Expanded(
+                        Expanded(
                           child: Padding(
                             padding: EdgeInsets.only(top: 1, left: 20),
                             child: TextField(
+                              controller: user,
                               decoration: InputDecoration(
                                 hintText: 'Usuário',
                                 hintStyle: TextStyle(color: Color(0xFF11111F)),
@@ -113,10 +101,11 @@ class MyLoginPage extends StatelessWidget {
                     //Senha
                     child: Row(
                       children: [
-                        const Expanded(
+                        Expanded(
                           child: Padding(
                             padding: EdgeInsets.only(top: 1, left: 20),
                             child: TextField(
+                              controller: password,
                               decoration: InputDecoration(
                                 hintText: 'Senha',
                                 hintStyle: TextStyle(color: Color(0xFF11111F)),
@@ -144,10 +133,15 @@ class MyLoginPage extends StatelessWidget {
                       height: MediaQuery.of(context).size.width * 0.1,
                       child: ElevatedButton(
                         onPressed: () {
+                          var userText = user.text.toString();
+                          var passText = password.text.toString();
+                          UserModel uModel = UserModel(
+                              userText, "test", "test@gmail.co,", passText);
+                          dbHelper.saveData(uModel);
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const MyMainPage()),
+                                builder: (context) => const MyLoginPage()),
                           );
                         },
                         style: ElevatedButton.styleFrom(
@@ -157,7 +151,7 @@ class MyLoginPage extends StatelessWidget {
                           ),
                         ),
                         child: const Text(
-                          'Login',
+                          'Criar',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 16,
@@ -166,41 +160,6 @@ class MyLoginPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                  const SizedBox(height: 14),
-                  GestureDetector(
-                    onTap: () {
-                      // Aqui você pode adicionar a lógica para abrir o link desejado
-                      // por exemplo, utilizando o pacote url_launcher
-                    },
-                    child: const Text(
-                      'Crie sua conta aqui',
-                      style: TextStyle(
-                        color: Color(0xFFFF8F1C),
-                        fontSize: 11,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  const SizedBox(height: 14),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const MyMainPage()),
-                      );
-                    },
-                    child: const Text(
-                      'Ou entre como convidado!',
-                      style: TextStyle(
-                        color: Color(0xFFFF8F1C),
-                        fontSize: 11,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
                     ),
                   ),
                 ],

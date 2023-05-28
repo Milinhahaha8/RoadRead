@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:roadread/Model/UserModel.dart';
 import 'package:roadread/screen/principal.dart';
+import 'package:roadread/screen/signup.dart';
+import 'package:roadread/DatabaseHandler/DbHelper.dart';
+import 'dart:developer' as developer;
 
 void main() {
   runApp(const MyApp());
@@ -25,6 +29,10 @@ class MyLoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final DbHelper dbHelper = new DbHelper();
+    final TextEditingController user = TextEditingController();
+    final TextEditingController password = TextEditingController();
+
     return Scaffold(
       backgroundColor: const Color(0xFF11111F),
       appBar: AppBar(
@@ -77,10 +85,11 @@ class MyLoginPage extends StatelessWidget {
                     ),
                     child: Row(
                       children: [
-                        const Expanded(
+                        Expanded(
                           child: Padding(
                             padding: EdgeInsets.only(top: 1, left: 20),
                             child: TextField(
+                              controller: user,
                               decoration: InputDecoration(
                                 hintText: 'Usuário',
                                 hintStyle: TextStyle(color: Color(0xFF11111F)),
@@ -95,7 +104,7 @@ class MyLoginPage extends StatelessWidget {
                             icon: const Icon(Icons.person,
                                 color: Color(0xFF11111F)),
                             onPressed: () {
-                              //Se quiser que o ícone de usuário faça algo
+                              //test: save mock user when clicking this icon
                             },
                             padding: const EdgeInsets.only(bottom: 1)),
                       ],
@@ -113,10 +122,11 @@ class MyLoginPage extends StatelessWidget {
                     //Senha
                     child: Row(
                       children: [
-                        const Expanded(
+                        Expanded(
                           child: Padding(
                             padding: EdgeInsets.only(top: 1, left: 20),
                             child: TextField(
+                              controller: password,
                               decoration: InputDecoration(
                                 hintText: 'Senha',
                                 hintStyle: TextStyle(color: Color(0xFF11111F)),
@@ -139,16 +149,19 @@ class MyLoginPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 14),
                   Center(
+                    //Botão de Login
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width * 0.5,
                       height: MediaQuery.of(context).size.width * 0.1,
                       child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const MyMainPage()),
-                          );
+                        onPressed: () async {
+                          var userText = user.text.toString();
+                          var passText = password.text.toString();
+                          await dbHelper
+                              .getLoginUser(userText, passText)
+                              .then((UserData) {
+                            print(UserData?.userID);
+                          });
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFFFF8F1C),
@@ -169,10 +182,14 @@ class MyLoginPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 14),
+                  //Local do Crie sua conta aqui
                   GestureDetector(
                     onTap: () {
-                      // Aqui você pode adicionar a lógica para abrir o link desejado
-                      // por exemplo, utilizando o pacote url_launcher
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SignupPage()),
+                      );
                     },
                     child: const Text(
                       'Crie sua conta aqui',
@@ -193,6 +210,7 @@ class MyLoginPage extends StatelessWidget {
                             builder: (context) => const MyMainPage()),
                       );
                     },
+                    //Local da entrada como convidado
                     child: const Text(
                       'Ou entre como convidado!',
                       style: TextStyle(
