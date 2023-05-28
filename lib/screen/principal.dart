@@ -99,12 +99,18 @@ class MyMainPage extends StatelessWidget {
                     //   ),
                     //  ),
 
-                    //botão de arquivo em nuvem
+                    //botão de seleção do arquivo
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.4,
                       height: MediaQuery.of(context).size.width * 0.2,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        //Seleciona o arquivo
+                        onPressed: () async {
+                          FilePickerResult? result =
+                              await FilePicker.platform.pickFiles(
+                            type: FileType.any,
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF11111F),
                           shape: RoundedRectangleBorder(

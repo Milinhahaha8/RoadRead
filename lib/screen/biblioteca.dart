@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:roadread/screen/bibliotecaGlobal.dart';
+import 'package:roadread/screen/principal.dart';
 
 class MyLibraryPage extends StatelessWidget {
   const MyLibraryPage({super.key});
@@ -18,39 +20,92 @@ class MyLibraryPage extends StatelessWidget {
             decoration: const BoxDecoration(
               color: Color(0xFF11111F),
             ),
-            child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: const Color(0xFFFF8F1C),
-                borderRadius: BorderRadius.circular(25),
-              ),
-              child: Row(
-                children: [
-                  const Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 13),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Pesquisar na Biblioteca',
-                          hintStyle: TextStyle(color: Color(0xFF11111F)),
-                          border: InputBorder.none,
+            //Barra de pesquisa e botão para biblioteca global
+            child: Row(
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width / 10 - 9,
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFFF8F1C),
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  child: IconButton(
+                    icon: const Icon(Icons.arrow_back_rounded,
+                        color: Color(0xFF11111F)),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const MyMainPage()),
+                      );
+                    },
+                    padding: const EdgeInsets.only(bottom: 1),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFF8F1C),
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            margin: const EdgeInsets.only(left: 20, top: 12),
+                            child: const TextField(
+                              decoration: InputDecoration(
+                                hintText: 'Pesquisar',
+                                hintStyle: TextStyle(color: Color(0xFF11111F)),
+                                border: InputBorder.none,
+                              ),
+                              textAlign: TextAlign.left,
+                              style: TextStyle(color: Color(0xFF11111F)),
+                            ),
+                          ),
                         ),
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Color(0xFF11111F)),
-                      ),
+                        Container(
+                          margin: const EdgeInsets.only(left: 10, top: 5),
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            child: Icon(Icons.search, color: Color(0xFF11111F)),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  IconButton(
-                      icon: const Icon(Icons.search, color: Color(0xFF11111F)),
-                      onPressed: () {
-                        // Adicione a ação desejada quando o botão de pesquisa for pressionado
-                      },
-                      padding: const EdgeInsets.only(bottom: 1)),
-                ],
-              ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width / 9 - 9,
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFFF8F1C),
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  child: IconButton(
+                    icon: const Icon(Icons.menu_book_rounded,
+                        color: Color(0xFF11111F)),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LibraryGlobalPage()),
+                      );
+                    },
+                    padding: const EdgeInsets.only(bottom: 1),
+                  ),
+                ),
+              ],
             ),
           ),
+          //Título da página
           Container(
             height: 30,
             alignment: Alignment.center,
@@ -63,6 +118,7 @@ class MyLibraryPage extends StatelessWidget {
               ),
             ),
           ),
+          //Conteúdo da página
           Expanded(
             child: Container(
               margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 41),

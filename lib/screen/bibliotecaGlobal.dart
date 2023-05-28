@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:roadread/screen/principal.dart';
+import 'package:roadread/screen/biblioteca.dart';
 
 class LibraryGlobalPage extends StatelessWidget {
   const LibraryGlobalPage({super.key});
@@ -9,7 +9,7 @@ class LibraryGlobalPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF11111F),
       appBar: AppBar(
-        title: const Text('Biblioteca'),
+        title: const Text('Biblioteca Global'),
       ),
       body: Column(
         children: [
@@ -23,7 +23,7 @@ class LibraryGlobalPage extends StatelessWidget {
             child: Row(
               children: [
                 Container(
-                  width: MediaQuery.of(context).size.width / 6 - 4,
+                  width: MediaQuery.of(context).size.width / 10 - 9,
                   margin:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
                   alignment: Alignment.center,
@@ -31,26 +31,17 @@ class LibraryGlobalPage extends StatelessWidget {
                     color: const Color(0xFFFF8F1C),
                     borderRadius: BorderRadius.circular(25),
                   ),
-                  child: ElevatedButton(
+                  child: IconButton(
+                    icon: const Icon(Icons.arrow_back_rounded,
+                        color: Color(0xFF11111F)),
                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const MyMainPage()),
+                            builder: (context) => const MyLibraryPage()),
                       );
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFFF8F1C),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                    ),
-                    child: const Text(
-                      'Voltar',
-                      style: TextStyle(
-                        color: Color(0xFF11111F), // Define a cor do texto
-                      ),
-                    ),
+                    padding: const EdgeInsets.only(bottom: 1),
                   ),
                 ),
                 Expanded(
@@ -96,7 +87,7 @@ class LibraryGlobalPage extends StatelessWidget {
             height: 30,
             alignment: Alignment.center,
             child: const Text(
-              'Minha Biblioteca',
+              'Biblioteca Global',
               style: TextStyle(
                 color: Color(0xFFFF8F1C),
                 fontSize: 18,
