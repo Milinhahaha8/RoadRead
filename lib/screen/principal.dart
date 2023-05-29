@@ -5,12 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:roadread/screen/biblioteca.dart';
 import 'package:file_picker/file_picker.dart';
 //import 'package:flutter_tts/flutter_tts.dart';
+import 'package:text_to_speech/text_to_speech.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class MyMainPage extends StatelessWidget {
   const MyMainPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final storageRef = FirebaseStorage.instance;
+
     return Scaffold(
       backgroundColor: const Color(0xFFFF8F1C),
       appBar: AppBar(
@@ -106,10 +110,30 @@ class MyMainPage extends StatelessWidget {
                       child: ElevatedButton(
                         //Seleciona o arquivo
                         onPressed: () async {
+                          TextToSpeech tts = TextToSpeech();
+                          tts.speak("chanana nanana");
+
+                          // Seleciona um arquivo local
                           FilePickerResult? result =
                               await FilePicker.platform.pickFiles(
                             type: FileType.any,
                           );
+                          print("chanana nanana2");
+                          if (result != null) {
+                            print("chanana nanana3");
+                            //    // Obtém o caminho do arquivo selecionado
+                            String filePath = result.files.single.path!;
+                            var file = File(filePath);
+
+                            // Lê o conteúdo do arquivo como texto
+                            var text = await File(filePath)
+                                .readAsString(encoding: utf8);
+                            tts.speak(text);
+                            var snapshot = await storageRef
+                                .ref()
+                                .child(result.files.single.name)
+                                .putFile(file);
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF11111F),

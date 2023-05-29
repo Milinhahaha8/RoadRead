@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:roadread/Model/UserModel.dart';
+import 'package:roadread/Repository/DataRepository.dart';
+//import 'package:roadread/Model/UserModel.dart';
 import 'package:roadread/screen/principal.dart';
 import 'package:roadread/screen/recuperarSenha.dart';
 import 'package:roadread/screen/signup.dart';
-import 'package:roadread/DatabaseHandler/DbHelper.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+//import 'Repository/DataRepository.dart';
+
+Future<void> main() async {
+  //1
+  WidgetsFlutterBinding.ensureInitialized();
+  //2
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -29,9 +36,9 @@ class MyLoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DbHelper dbHelper = new DbHelper();
     final TextEditingController user = TextEditingController();
     final TextEditingController password = TextEditingController();
+    final DataRepository repository = DataRepository();
 
     return Scaffold(
       backgroundColor: const Color(0xFF11111F),
@@ -173,11 +180,18 @@ class MyLoginPage extends StatelessWidget {
                         onPressed: () async {
                           var userText = user.text.toString();
                           var passText = password.text.toString();
-                          await dbHelper
-                              .getLoginUser(userText, passText)
-                              .then((UserData) {
-                            print(UserData?.userID);
-                          });
+                          bool exists =
+                              await repository.login(userText, passText);
+                          if (exists == true) {
+                            print("LOGIN SUCESSO!!!!!!!!!");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const MyMainPage()),
+                            );
+                          } else {
+                            print("LOGIN FAIOU!!!!!!!!!");
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFFFF8F1C),

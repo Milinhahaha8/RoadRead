@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:roadread/main.dart';
 import 'package:roadread/Model/UserModel.dart';
-import 'package:roadread/DatabaseHandler/DbHelper.dart';
 
 class RecuperarPage extends StatelessWidget {
   const RecuperarPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final DbHelper dbHelper = new DbHelper();
     final TextEditingController user = TextEditingController();
     final TextEditingController password = TextEditingController();
 
@@ -150,13 +148,8 @@ class RecuperarPage extends StatelessWidget {
                       height: MediaQuery.of(context).size.width * 0.1,
                       child: ElevatedButton(
                         onPressed: () async {
-                          var userText = user.text.toString();
-                          var passText = password.text.toString();
-                          await dbHelper
-                              .getLoginUser(userText, passText)
-                              .then((UserData) {
-                            print(UserData?.userID);
-                          });
+                          //var userText = user.text.toString();
+                          //var passText = password.text.toString();
                           Navigator.push(
                             context,
                             MaterialPageRoute(

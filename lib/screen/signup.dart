@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:roadread/main.dart';
 import 'package:roadread/Model/UserModel.dart';
-import 'package:roadread/DatabaseHandler/DbHelper.dart';
+
+import '../Repository/DataRepository.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final DbHelper dbHelper = new DbHelper();
+    final DataRepository repository = DataRepository();
     final TextEditingController user = TextEditingController();
     final TextEditingController password = TextEditingController();
 
@@ -152,11 +153,8 @@ class SignupPage extends StatelessWidget {
                         onPressed: () async {
                           var userText = user.text.toString();
                           var passText = password.text.toString();
-                          await dbHelper
-                              .getLoginUser(userText, passText)
-                              .then((UserData) {
-                            print(UserData?.userID);
-                          });
+                          final newUser = UserModel(userText, passText);
+                          repository.addUser(newUser);
                           Navigator.push(
                             context,
                             MaterialPageRoute(

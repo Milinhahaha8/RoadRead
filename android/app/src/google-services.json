@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "847305545041",
+    "project_id": "roadread-f795a",
+    "storage_bucket": "roadread-f795a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847305545041:android:f744ad79091dd5b27eef70",
+        "android_client_info": {
+          "package_name": "com.camilalacerda.roadread"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "847305545041-oo21e2pdt9gjh32fr95so51ar72tv7tq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBslmtW0OV9vOVgx_0YiQX6F_h_Ji6M8dQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "847305545041-oo21e2pdt9gjh32fr95so51ar72tv7tq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

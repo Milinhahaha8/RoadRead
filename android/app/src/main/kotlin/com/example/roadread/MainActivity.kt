@@ -1,4 +1,4 @@
-package com.example.roadread
+package com.camilalacerda.roadread
 
 import io.flutter.embedding.android.FlutterActivity
 
